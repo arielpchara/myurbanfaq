@@ -5,16 +5,20 @@ import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import { FaqListComponent } from './faq-list/faq-list.component';
+import { LoginComponent } from './login/login.component';
+import { routing } from './app.routes';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FaqListComponent
+    FaqListComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    routing
   ],
   providers: [],
   bootstrap: [AppComponent]

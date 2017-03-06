@@ -37,8 +37,6 @@ function authenticateHandler(password, res) {
         if (err) {
             throw err;
         }
-        console.log(user);
-        console.log(sha256(password));
         if (!user || user.password !== sha256(password)) {
             return res.json(authenticateErrorHandler());
         }
@@ -54,9 +52,11 @@ function authenticateHandler(password, res) {
 }
 
 exports.authenticate = (req, res) => {
-    User.findOne({
-        email: req.body.email
-    }, authenticateHandler(req.body.password, res));
+    console.log(req);
+    res.json(req.body);
+    // User.findOne({
+    //     email: req.body.email
+    // }, authenticateHandler(req.body.password, res));
 }
 
 

@@ -31,6 +31,14 @@ exports.all = (req, res) => {
     });
 }
 
+exports.create = (req, res) => {
+    let newFaw = new Faq(req.body);
+    newFaq.save((err, saved) => {
+        if (err) throw err;
+        req.json(saved);
+    })
+}
+
 exports.update = (req, res) => {
     Faq.findById(
         req.params.id || req.body.id,

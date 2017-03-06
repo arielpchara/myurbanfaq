@@ -1,0 +1,11 @@
+<form #loginForm="ngForm" (ngSubmit)="submit(loginForm)" novalidate>
+    <div>
+        <label>Email: <input id="email" type="email" name="email" id="login_email" #email="ngModel" [(ngModel)]="login.email" required></label> {{email.valid}}
+        <div [hidden]="submitted || email.valid || email.pristine" class="alert alert-danger"> Name is required </div>
+    </div>
+    <div>
+        <label>Senha: <input id="password" type="password" name="password" id="login_password" #password="ngModel" [(ngModel)]="login.passowrd" required></label> {{password.valid}}
+        <div [hidden]="submitted || password.valid || password.pristine" class="alert alert-danger"> Name is required </div>
+    </div>
+    <button>ENTRAR</button>
+</form>

@@ -13,7 +13,7 @@ import { FaqService } from '../faq.service';
 })
 export class FaqListComponent implements OnInit {
 
-  public faqs;
+  public faqs = [];
   
   constructor(private faqService:FaqService) {
     faqService.getFaqs().subscribe(
