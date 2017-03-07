@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 var schema = new mongoose.Schema({
     title: String,
-    publish: Date,
+    publish: {
+        type: Date,
+        default: Date.now
+    },
     content: String
 });
 

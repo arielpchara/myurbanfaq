@@ -30,5 +30,4 @@ router.get('/v1', (req, res) => {
 });
 
 
-
 module.exports = router;

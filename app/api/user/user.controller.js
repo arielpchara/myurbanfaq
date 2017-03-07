@@ -37,7 +37,7 @@ function authenticateHandler(password, res) {
         if (err) {
             throw err;
         }
-        if (!user || user.password !== sha256(password)) {
+        if (!user || user.password !== sha256(password) || !user.admin) {
             return res.json(authenticateErrorHandler());
         }
         return res.json(authenticateSuccessHandler(
@@ -52,11 +52,10 @@ function authenticateHandler(password, res) {
 }
 
 exports.authenticate = (req, res) => {
-    console.log(req);
-    res.json(req.body);
-    // User.findOne({
-    //     email: req.body.email
-    // }, authenticateHandler(req.body.password, res));
+    console.log(req.body);
+    User.findOne({
+        email: req.body.email
+    }, authenticateHandler(req.body.password, res));
 }
 
 

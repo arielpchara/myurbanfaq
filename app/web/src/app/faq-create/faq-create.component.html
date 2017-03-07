@@ -1,0 +1,10 @@
+<form #faqCreateForm="ngForm" (ngSubmit)="submit(faqCreateForm)">
+    <div>
+        <label>Titlo: <input id="title" type="text" name="title" id="login_title" #title="ngModel" [(ngModel)]="faq.title" required></label>
+    </div>
+    <div>
+        <label>Conteudo: 
+          <textarea name="content" id="content" cols="30" rows="10" #content="ngModel" [(ngModel)]="faq.content"></textarea> </label>
+    </div>
+    <button>Salvar</button>
+</form>

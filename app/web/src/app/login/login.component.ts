@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
+
 import { UserService } from '../user.service';
 
 @Component({
@@ -6,7 +8,8 @@ import { UserService } from '../user.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css'],
   providers: [
-    UserService
+    UserService,
+    CookieService
   ]
 })
 export class LoginComponent implements OnInit {
@@ -16,7 +19,7 @@ export class LoginComponent implements OnInit {
     passowrd: ''
   }
 
-  constructor(private userService: UserService ) { }
+  constructor(private userService: UserService, private cookie:CookieService ) { }
 
   ngOnInit() {
   }
@@ -24,7 +27,7 @@ export class LoginComponent implements OnInit {
   submit(form) {
     if( form.valid ) {
       this.userService.login( this.login.email, this.login.passowrd ).subscribe(
-        done => console.log(done),
+        done => this.cookie.put('authorization_token', done.token),
         err => console.error(err)
       );
     }
