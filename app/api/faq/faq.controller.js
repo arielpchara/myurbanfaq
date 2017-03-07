@@ -2,7 +2,7 @@ const responser = require('../responser');
 const Faq = require('./faq.model');
 
 
-exports.list = (req, res) => {
+exports.get = (req, res) => {
     Faq.find({
         publish: {
             $lte: new Date()
