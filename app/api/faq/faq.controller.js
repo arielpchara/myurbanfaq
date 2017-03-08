@@ -1,59 +1,38 @@
-const responser = require('../responser');
-const Faq = require('./faq.model');
+const handler = require('../handler'),
+    faqService = require('./faq.service'),
+    Faq = require('./faq.model');
 
+exports.list = (req, res) => {
+    const { successHandle, errorHandle } = handler(req, res);
+    faqService.list()
+        .then(successHandle)
+        .catch(errorHandle);
+};
 
 exports.get = (req, res) => {
-    Faq.find({
-        publish: {
-            $lte: new Date()
-        }
-    }, function(err, data) {
-        if (err) {
-            console.error(err);
-            return res.status(500).json(err);
-        }
-        return res.json(responser(req, {
-            list: data
-        }));
-    });
-}
+    const { successHandle, errorHandle } = handler(req, res);
+    faqService.getById(req.params.id)
+        .then(successHandle)
+        .catch(errorHandle);
+};
 
-
-exports.all = (req, res) => {
-    Faq.find({}, function(err, data) {
-        if (err) {
-            console.error(err);
-            return res.status(500).json(err);
-        }
-        return res.json(responser(req, {
-            list: data
-        }));
-    });
-}
+exports.published = (req, res) => {
+    const { successHandle, errorHandle } = handler(req, res);
+    faqService.published()
+        .then(successHandle)
+        .catch(errorHandle);
+};
 
 exports.create = (req, res) => {
-    let newFaq = new Faq(req.body);
-    newFaq.save((err, saved) => {
-        if (err) throw err;
-        res.json(saved);
-    })
-}
+    const { successHandle, errorHandle } = handler(req, res);
+    faqService.create(req.body)
+        .then(successHandle)
+        .catch(errorHandle);
+};
 
 exports.update = (req, res) => {
-    Faq.findById(
-        req.params.id || req.body.id,
-        (err, faq) => {
-            if (err) throw err;
-            if (!faq) {
-                return {
-                    sucess: false,
-                    message: 'Not found'
-                }
-            }
-            faq = Object.assign(faq, req.body);
-            faq.save((err) => {
-                if (err) throw err;
-            })
-        }
-    );
+    const { successHandle, errorHandle } = handler(req, res);
+    faqService.update(req.params.id, req.body)
+        .then(successHandle)
+        .catch(errorHandle);
 };

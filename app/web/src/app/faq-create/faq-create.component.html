@@ -1,10 +1,17 @@
-<form #faqCreateForm="ngForm" (ngSubmit)="submit(faqCreateForm)">
-    <div>
-        <label>Titlo: <input id="title" type="text" name="title" id="login_title" #title="ngModel" [(ngModel)]="faq.title" required></label>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <form #faqCreateForm="ngForm" (ngSubmit)="submit(faqCreateForm)">
+                <div class="form-group">
+                    <label>Titlo:</label>
+                    <input class="form-control" id="title" type="text" name="title" id="login_title" #title="ngModel" [(ngModel)]="faq.title" required>
+                </div>
+                <div class="form-group">
+                    <label>Conteudo: </label>
+                    <textarea class="form-control" name="content" id="content" cols="30" rows="5" #content="ngModel" [(ngModel)]="faq.content" required></textarea>
+                </div>
+                <button class="btn btn-block btn-primary">Salvar</button>
+            </form>
+        </div>
     </div>
-    <div>
-        <label>Conteudo: 
-          <textarea name="content" id="content" cols="30" rows="10" #content="ngModel" [(ngModel)]="faq.content"></textarea> </label>
-    </div>
-    <button>Salvar</button>
-</form>
+</div>

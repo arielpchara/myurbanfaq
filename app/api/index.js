@@ -4,23 +4,16 @@ const path = require('path');
 
 require('./conn.db');
 
-
-
 const responser = require('./responser');
-
 const router = express.Router();
 
 router.use((req, res, next) => {
+    req.fullUrl = req.protocol + '://' + req.get('host') + req.originalUrl;
     res.append('Access-Control-Allow-Origin', '*');
     next();
 });
 
 router.use('/v1/faq', require('./faq/faq.router'));
-
-// router.get('/v1/env', (req, res) => {
-//     res.json(process.env);
-// });
-
 router.use('/v1/user', require('./user/user.router'));
 
 router.get('/v1', (req, res) => {

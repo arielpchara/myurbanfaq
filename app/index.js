@@ -1,9 +1,5 @@
 'use static';
 
-
-// env variaviables
-require('dotenv').config();
-
 const path = require('path');
 const express = require('express');
 const app = express();
@@ -18,10 +14,10 @@ if (process.env.ENVIRONMENT !== 'TEST')
     app.use(morgan('dev'));
 
 
+app.use('/api', require('./api'));
+
 const staticDir = path.join(__dirname, '/web/dist/');
 const indexFile = path.join(staticDir, 'index.html');
-
-app.use('/api', require('./api'));
 app.use('/', express.static(__dirname + '/web/dist/'));
 app.use((req, res, next) => {
     fs.readFile(

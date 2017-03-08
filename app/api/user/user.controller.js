@@ -85,6 +85,10 @@ exports.authenticate = (req, res) => {
     }, authenticateHandler(req.body.password, res));
 };
 
+exports.authenticateFacebook = (req, res) => {
+    res.json({ ok: req.query });
+};
+
 function notAuthorizedHandle(status) {
     return {
         success: false,

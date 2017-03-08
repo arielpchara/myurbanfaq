@@ -1,7 +1,9 @@
-const mongoose = require('mongoose');
+const mongoose = require('mongoose'),
+    S = require('string');
 
-var schema = new mongoose.Schema({
+var faqSchema = new mongoose.Schema({
     title: String,
+    slug: String,
     publish: {
         type: Date,
         default: Date.now
@@ -9,4 +11,13 @@ var schema = new mongoose.Schema({
     content: String
 });
 
-module.exports = mongoose.model('Faq', schema);
+faqSchema.pre('save', function(next) {
+    if (!this.slug) {
+        this.slug = S(this.title).slugify().s;
+    }
+    next();
+});
+
+faqSchema.index({ title: 1 }, { unique: true });
+
+module.exports = mongoose.model('Faq', faqSchema);
