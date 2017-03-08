@@ -1,10 +1,10 @@
-const sha256 = require('sha256');
-const jwt = require('jsonwebtoken');
-const _ = require('lodash');
+const sha256 = require('sha256'),
+    jwt = require('jsonwebtoken'),
+    _ = require('lodash'),
+    https = require('https');
 
-const responser = require('../responser');
-const User = require('./user.model');
-
+const responser = require('../responser'),
+    User = require('./user.model');
 
 exports.get = (req, res) => {
     User.findOne({
@@ -22,8 +22,8 @@ exports.create = (req, res) => {
     newUser.save((err, saved) => {
         if (err) throw err;
         res.json(saved);
-    })
-}
+    });
+};
 
 exports.update = (req, res) => {
     User.findById(
@@ -85,9 +85,6 @@ exports.authenticate = (req, res) => {
     }, authenticateHandler(req.body.password, res));
 };
 
-exports.authenticateFacebook = (req, res) => {
-    res.json({ ok: req.query });
-};
 
 function notAuthorizedHandle(status) {
     return {

@@ -1,5 +1,3 @@
-responser = require('./responser')
-
 function jsonModel(url, data) {
     return Object.assign({ url }, data);
 }

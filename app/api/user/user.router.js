@@ -12,8 +12,5 @@ router.post('/authenticate', userController.authenticate);
 router.get('/check', userController.check, userController.sessionUser);
 router.get('/check/admin', userController.check, userController.isAdmin, userController.sessionUser);
 
-// router.get('/', (req, res) => res.json({ ok: true }));
-
-router.get('/authenticate/facebook', userController.authenticateFacebook);
 
 module.exports = router;
