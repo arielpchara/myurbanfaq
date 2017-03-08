@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
 const sha256 = require('sha256');
 
-var schema = new mongoose.Schema({
+var userSchema = new mongoose.Schema({
     email: String,
     password: String,
     admin: Boolean
 });
 
-schema.pre('save', () => {
+userSchema.pre('save', function(next) {
     this.password = sha256(this.password);
+    next();
 })
 
-module.exports = mongoose.model('User', schema);
+userSchema.index({ email: 1 }, { unique: true });
+
+module.exports = mongoose.model('User', userSchema);

@@ -17,6 +17,10 @@ router.use((req, res, next) => {
 
 router.use('/v1/faq', require('./faq/faq.router'));
 
+// router.get('/v1/env', (req, res) => {
+//     res.json(process.env);
+// });
+
 router.use('/v1/user', require('./user/user.router'));
 
 router.get('/v1', (req, res) => {

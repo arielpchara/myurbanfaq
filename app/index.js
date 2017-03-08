@@ -13,7 +13,9 @@ const fs = require('fs');
 
 // app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
-app.use(morgan('dev'));
+
+if (process.env.ENVIRONMENT !== 'TEST')
+    app.use(morgan('dev'));
 
 
 const staticDir = path.join(__dirname, '/web/dist/');
@@ -39,4 +41,5 @@ module.exports = function(port) {
         response => {
             console.log(`start in port ${port}`);
         });
+    return app;
 }

@@ -53,7 +53,6 @@ exports.update = (req, res) => {
             faq = Object.assign(faq, req.body);
             faq.save((err) => {
                 if (err) throw err;
-                res.json(faq);
             })
         }
     );
