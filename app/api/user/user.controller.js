@@ -5,7 +5,7 @@ const responser = require('../responser');
 const User = require('./user.model');
 
 
-exports.list = (req, res) => {
+exports.get = (req, res) => {
     User.find({}, function(err, data) {
         if (err) {
             console.error(err);
@@ -15,13 +15,13 @@ exports.list = (req, res) => {
             list: data
         }));
     });
-}
+};
 
 function authenticateErrorHandler() {
     return {
         success: false,
         message: 'error'
-    }
+    };
 }
 
 function authenticateSuccessHandler(token) {
@@ -29,7 +29,7 @@ function authenticateSuccessHandler(token) {
         success: true,
         message: 'Enjoy your token!',
         token: token
-    }
+    };
 }
 
 function authenticateHandler(password, res) {
@@ -48,15 +48,14 @@ function authenticateHandler(password, res) {
                 }
             )
         ));
-    }
+    };
 }
 
 exports.authenticate = (req, res) => {
-    console.log(req.body);
     User.findOne({
         email: req.body.email
     }, authenticateHandler(req.body.password, res));
-}
+};
 
 
 exports.check = (req, res, next) => {
@@ -84,4 +83,8 @@ exports.check = (req, res, next) => {
         });
 
     }
-}
+};
+
+exports.isAdmin = (req, res, next) => {
+    next();
+};
