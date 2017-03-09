@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { routing } from './app.routes';
 import { FaqCreateComponent } from './faq-create/faq-create.component';
 import { FaqComponent } from './faq/faq.component';
+import { SearchComponent } from './search/search.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { FaqComponent } from './faq/faq.component';
     FaqListComponent,
     LoginComponent,
     FaqCreateComponent,
-    FaqComponent
+    FaqComponent,
+    SearchComponent
   ],
   imports: [
     BrowserModule,

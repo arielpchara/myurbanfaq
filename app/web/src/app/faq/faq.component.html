@@ -1,2 +1,4 @@
-<app-faq-create></app-faq-create>
-<app-faq-list></app-faq-list>
+<div class="container">
+    <app-search placeholder="Estou procurando por ..." (searching)="list.update($event)"></app-search>
+    <app-faq-list #list></app-faq-list>
+</div>

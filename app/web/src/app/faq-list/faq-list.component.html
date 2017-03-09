@@ -1,9 +1,6 @@
-<div class="container">
-    <h3>FAQ</h3>
-    <div *ngFor="let faq of faqs.data" class="row">
-        <div class="col-sm-12">
-            {{faq.title}} <small>publicado {{faq.publish}}</small>
-            <div><code>{{faq.content}}</code></div>
-        </div>
+<div *ngFor="let faq of faqs.data" class="row">
+    <div class="col-sm-12">
+        {{faq.title}} <small>publicado {{faq.publish}}</small>
+        <div><code>{{faq.content}}</code></div>
     </div>
 </div>
