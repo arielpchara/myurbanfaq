@@ -5,7 +5,7 @@
     "main": "index.js",
     "scripts": {
         "postinstall": "chmod a+x ./bin/start.sh && ./bin/start.sh",
-        "start": "forever start ./index.js --spinSleepTime 1000",
+        "start": "node index.js",
         "test": "mocha test.js"
     },
     "repository": {
