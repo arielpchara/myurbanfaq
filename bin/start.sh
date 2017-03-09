@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
-npm install forever @angular/cli -g
+npm install forever -g
 cd ./app/web
 npm install
-ng build
+./node_modules/@angular/cli/bin/ng build
 cd ../..
