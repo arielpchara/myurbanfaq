@@ -4,5 +4,5 @@
 npm install @angular/cli -g
 cd ./app/web
 npm install
-ng build
+ng build --prod
 cd ../..
