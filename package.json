@@ -4,7 +4,8 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "postinstall": "chmod a+x ./bin/start.sh && ./bin/start.sh",
+        "preinstall": "chmod a+x ./bin/preinstall.sh && ./bin/preinstall.sh",
+        "postinstall": "chmod a+x ./bin/postinstall.sh && ./bin/postinstall.sh",
         "start": "node index.js",
         "test": "mocha test.js"
     },
