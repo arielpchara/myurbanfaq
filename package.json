@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "postinstall": "./bin/start.sh",
+        "postinstall": "chmod a+x ./bin/start.sh && ./bin/start.sh",
         "start": "forever start app.js --spinSleepTime 1000",
         "test": "mocha test.js"
     },
