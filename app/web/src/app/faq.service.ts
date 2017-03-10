@@ -12,8 +12,9 @@ export class FaqService {
 
   constructor(private http: Http) { }
 
-  getFaqs() : Observable<Faq[]> {
-    return this.http.get('/api/v1/faq')
+  getFaqs(q:any = '') : Observable<Faq[]> {
+    return this.http.get(`/api/v1/faq?q=${q}`)
+      .throttleTime(500)
       .map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
   }

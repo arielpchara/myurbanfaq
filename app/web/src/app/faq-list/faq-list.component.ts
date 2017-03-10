@@ -16,14 +16,17 @@ export class FaqListComponent implements OnInit {
 
   public faqs = [];
   
-  constructor(private faqService:FaqService) {
-    faqService.getFaqs().subscribe(
+  constructor(private faqService:FaqService) {}
+
+  ngOnInit() {
+    this.query('');
+  }
+
+  query(value) {
+    this.faqService.getFaqs(value).subscribe(
       faqs => this.faqs = faqs,
       err =>  console.error(err)
     );
-  }
-
-  ngOnInit() {
   }
 
 }
