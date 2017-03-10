@@ -14,7 +14,6 @@ export class FaqService {
 
   getFaqs(value) : Observable<Faq[]> {
     return this.http.get(`/api/v1/faq?q=${value}`)
-    .throttleTime(500)
       .map((res:Response) => res.json())
       .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
   }

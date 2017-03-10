@@ -1,5 +1,7 @@
 import { Component, OnInit, Input, Output, SimpleChange} from '@angular/core';
+import { FormsModule, FormControl }   from '@angular/forms';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { Observable } from 'rxjs/Rx';
 
 import { Faq } from '../faq';
 import { FaqService } from '../faq.service';
@@ -14,17 +16,21 @@ import { FaqService } from '../faq.service';
 })
 export class FaqListComponent implements OnInit {
   
-  public faqs = [];
+  faqs = [];
+  entrada = new FormControl();
   
   constructor(private faqService:FaqService) {}
 
   ngOnInit() {
-    this.query('');
+    this.update('');
+    this.entrada.valueChanges
+      .debounceTime(400)
+      .distinctUntilChanged()
+      .subscribe( data => this.update(data) )
   }
 
-  ngOnInit() {}
 
-  update(value) {
+  update(value:any = '') {
     this.faqService.getFaqs(value).subscribe(
       faqs => this.faqs = faqs,
       err =>  console.error(err)
