@@ -19,5 +19,6 @@ faqSchema.pre('save', function(next) {
 });
 
 faqSchema.index({ title: 1 }, { unique: true });
+faqSchema.index({ "content": "text" });
 
 module.exports = mongoose.model('Faq', faqSchema);

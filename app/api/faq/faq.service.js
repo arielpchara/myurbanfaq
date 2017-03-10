@@ -1,9 +1,18 @@
 const Faq = require('./faq.model');
 
 
-exports.list = (filter = {}) => {
-    return Faq.find(filter);
+exports.list = () => {
+    return Faq.find();
 };
+
+exports.filter = (text = {}) => {
+    const filter = {
+        $text: {
+            $search: text
+        }
+    };
+    return Faq.find(filter);
+}
 
 exports.published = () => {
     return exports.list({

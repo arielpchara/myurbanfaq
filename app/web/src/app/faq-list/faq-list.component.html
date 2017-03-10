@@ -1,6 +1,6 @@
-<form>
-    <input type="text" [formControl]="entrada">
-</form>
+<div class="form-group">
+    <input type="text" [formControl]="entrada" class="form-control" placeholder="Gostaria de saber como ...">
+</div>
 
 <div *ngFor="let faq of faqs.data" class="row">
     <div class="col-sm-12">
