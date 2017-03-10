@@ -4,10 +4,10 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "forever start app.js --spinSleepTime 1000",
+        "postinstall": "chmod a+x ./bin/start.sh && ./bin/start.sh",
+        "start": "node index.js",
         "test": "mocha test.js"
     },
-    "postinstall": "bin/start.sh",
     "repository": {
         "type": "git",
         "url": "git+https://github.com/arielpchara/myurbanfaq.git"

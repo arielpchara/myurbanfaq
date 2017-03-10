@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, SimpleChange} from '@angular/core';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { Faq } from '../faq';
@@ -13,7 +13,7 @@ import { FaqService } from '../faq.service';
   ]
 })
 export class FaqListComponent implements OnInit {
-
+  
   public faqs = [];
   
   constructor(private faqService:FaqService) {}
@@ -22,11 +22,12 @@ export class FaqListComponent implements OnInit {
     this.query('');
   }
 
-  query(value) {
+  ngOnInit() {}
+
+  update(value) {
     this.faqService.getFaqs(value).subscribe(
       faqs => this.faqs = faqs,
       err =>  console.error(err)
     );
   }
-
 }
