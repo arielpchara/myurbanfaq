@@ -1,3 +1,2 @@
-#!/usr/bin/env bash
-cd app/web
+ls
 ng build --prod
