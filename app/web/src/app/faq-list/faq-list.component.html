@@ -1,3 +1,7 @@
+<form>
+    <input type="text" [formControl]="entrada">
+</form>
+
 <div *ngFor="let faq of faqs.data" class="row">
     <div class="col-sm-12">
         {{faq.title}} <small>publicado {{faq.publish}}</small>

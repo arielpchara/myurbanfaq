@@ -1,0 +1,5 @@
+{
+    "verbose": true,
+    "watch": ["app/api/**/*.js", "**/*.js"],
+    "ignore": ["app/web"]
+}

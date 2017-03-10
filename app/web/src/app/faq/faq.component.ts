@@ -7,9 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FaqComponent implements OnInit {
 
-  public term;
-  public b;
-
   constructor() { }
 
   ngOnInit() {
