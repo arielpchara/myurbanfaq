@@ -4,7 +4,7 @@
     "description": "",
     "main": "index.js",
     "scripts": {
-        "start": "./node_modules/forever/bin/forever start index.js --spinSleepTime 2000",
+        "start": "./node_modules/forever/bin/forever start index.js",
         "test": "mocha test.js"
     },
     "repository": {
