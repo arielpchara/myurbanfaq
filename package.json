@@ -31,7 +31,7 @@
         "morgan": "^1.8.1",
         "sha256": "^0.2.0",
         "string": "^3.3.3",
-        "@angular/cli": "^1.0.0-rc.1",
+        "@angular/cli": "latest",
         "@angular/common": "^2.4.0",
         "@angular/compiler": "^2.4.0",
         "@angular/core": "^2.4.0",
