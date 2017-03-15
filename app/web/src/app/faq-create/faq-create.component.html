@@ -1,30 +1,38 @@
 <div class="container">
     <div class="row">
-        <div class="col-sm-6 col-sm-offset-3">
-            <form [formGroup]="faqForm">
+        <div class="col-sm-12">
+            <form [formGroup]="faqForm" (submit)="submit($event)">
                 <div class="form-group">
                     <label for="title">Titulo</label>
                     <input type="text" name="title" id="title" class="form-control" formControlName="title">
+                    <div [hidden]="!getFormErrors('title','required')">
+                        Obrigatório
+                    </div>
                 </div>
                 <div class="form-group">
-                    <label for="slug">Slug</label> <button type="button" (click)="autoSlugToggle()"> mudar slug </button>
-                    <div [hidden]="!autoSlug">
-                        <input type="text" class="form-control" [value]="slug" disabled>
+                    <div class="input-group">
+                        <input [style.display]="autoSlug ? 'block':'none'" type="text" class="form-control" [value]="slug" disabled>
+                        <input [style.display]="!autoSlug ? 'block':'none'" type="text" name="slug" id="slug" class="form-control" formControlName="slug">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button" (click)="autoSlugToggle()"> {{!autoSlug?'auto':'manual'}} </button>
+                        </span>
                     </div>
-                    <div [hidden]="autoSlug">
-                        <input type="text" name="slug" id="slug" class="form-control" formControlName="slug">
+                    <div [hidden]="!getFormErrors('slug','isNotSlug')">
+                        Error no slug
                     </div>
-                    <div [hidden]="!slugForm">
-                        Erro
+                    <div [hidden]="!getFormErrors('slug','required')">
+                        Obrigatório
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="content">Conteudo</label>
-                    <textarea name="content" id="content" class="form-control" formControlName="content"></textarea>
+                    <ckeditor formControlName="content" [config]="cheditorconfig"></ckeditor>
+                    <div [hidden]="!getFormErrors('content','required')">
+                        Obrigatório
+                    </div>
                 </div>
+                <button type="submit" class="btn btn-primary"> <i class="fa fa-save"></i> salvar </button>
             </form>
-            <p>Form value: {{faqForm.value|json}}</p>
-            <p>Form value: {{faqForm.status}}</p>
         </div>
     </div>
 </div>

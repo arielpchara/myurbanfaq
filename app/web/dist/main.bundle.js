@@ -9,7 +9,7 @@ webpackJsonp([1,4],{
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__angular_forms__ = __webpack_require__(198);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__faq_service__ = __webpack_require__(337);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__is_slug_directive__ = __webpack_require__(845);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__is_slug_directive__ = __webpack_require__(503);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return FaqCreateComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -23,7 +23,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
-var S = __webpack_require__(844);
+var S = __webpack_require__(380);
 
 
 var FaqCreateComponent = (function () {
@@ -33,24 +33,33 @@ var FaqCreateComponent = (function () {
         this.fb = fb;
         this.slug = '';
         this.autoSlug = true;
+        this.cheditorconfig = {
+            uiColor: '#FFFFFF',
+            language: 'pt-br',
+            skin: 'minimalist,/skins/minimalist/'
+        };
         this.createForm();
     }
-    FaqCreateComponent.prototype.ngOnInit = function () {
-    };
+    FaqCreateComponent.prototype.ngOnInit = function () { };
     FaqCreateComponent.prototype.createForm = function () {
         var _this = this;
         this.faqForm = this.fb.group({
-            title: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* Validators */].required],
-            content: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* Validators */].required]],
-            slug: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["c" /* Validators */].required, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__is_slug_directive__["a" /* isSlugValidation */])()]]
+            title: ['', __WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required],
+            content: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required]],
+            slug: ['', [__WEBPACK_IMPORTED_MODULE_2__angular_forms__["Validators"].required, __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_4__is_slug_directive__["a" /* isSlugValidation */])()]]
         });
         var title = this.faqForm.controls.title;
         title.valueChanges.subscribe(function (data) {
             _this.mountSlug(data);
         });
-        this.faqForm.valueChanges.subscribe(function (data) {
-            console.log(_this.faqForm.controls);
-        });
+    };
+    FaqCreateComponent.prototype.getFormErrors = function (controlName, type) {
+        var control = this.faqForm.get(controlName);
+        if (!control.touched) {
+            return false;
+        }
+        var avaiableErrors = control.errors;
+        return avaiableErrors && !!avaiableErrors[type];
     };
     FaqCreateComponent.prototype.mountSlug = function (title) {
         this.slug = S(title).slugify().s;
@@ -64,17 +73,24 @@ var FaqCreateComponent = (function () {
             this.mountSlug(this.faqForm.controls['title'].value);
         }
     };
+    FaqCreateComponent.prototype.submit = function (event) {
+        console.log(this.faqForm.valid);
+        if (this.faqForm.valid) {
+            this.faqService.createFaq(this.faqForm.value, this.cookie.get('authorization_token'))
+                .subscribe(function (resp) { return console.log(resp); }, function (err) { return console.error(err); });
+        }
+    };
     FaqCreateComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-faq-create',
-            template: __webpack_require__(567),
-            styles: [__webpack_require__(560)],
+            template: __webpack_require__(569),
+            styles: [__webpack_require__(562)],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_3__faq_service__["a" /* FaqService */],
                 __WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service__["CookieService"]
             ]
         }), 
-        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__faq_service__["a" /* FaqService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__faq_service__["a" /* FaqService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service__["CookieService"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service__["CookieService"]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* FormBuilder */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["d" /* FormBuilder */]) === 'function' && _c) || Object])
+        __metadata('design:paramtypes', [(typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__faq_service__["a" /* FaqService */] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_3__faq_service__["a" /* FaqService */]) === 'function' && _a) || Object, (typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service__["CookieService"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service__["CookieService"]) === 'function' && _b) || Object, (typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormBuilder"] !== 'undefined' && __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormBuilder"]) === 'function' && _c) || Object])
     ], FaqCreateComponent);
     return FaqCreateComponent;
     var _a, _b, _c;
@@ -159,8 +175,8 @@ var FaqComponent = (function () {
     FaqComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-faq',
-            template: __webpack_require__(569),
-            styles: [__webpack_require__(562)]
+            template: __webpack_require__(571),
+            styles: [__webpack_require__(564)]
         }), 
         __metadata('design:paramtypes', [])
     ], FaqComponent);
@@ -177,7 +193,7 @@ var FaqComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_service__ = __webpack_require__(503);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__user_service__ = __webpack_require__(505);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return LoginComponent; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -211,8 +227,8 @@ var LoginComponent = (function () {
     LoginComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-login',
-            template: __webpack_require__(570),
-            styles: [__webpack_require__(563)],
+            template: __webpack_require__(572),
+            styles: [__webpack_require__(565)],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_2__user_service__["a" /* UserService */],
                 __WEBPACK_IMPORTED_MODULE_1_angular2_cookie_services_cookies_service__["CookieService"]
@@ -227,7 +243,7 @@ var LoginComponent = (function () {
 
 /***/ }),
 
-/***/ 380:
+/***/ 381:
 /***/ (function(module, exports) {
 
 function webpackEmptyContext(req) {
@@ -236,20 +252,20 @@ function webpackEmptyContext(req) {
 webpackEmptyContext.keys = function() { return []; };
 webpackEmptyContext.resolve = webpackEmptyContext;
 module.exports = webpackEmptyContext;
-webpackEmptyContext.id = 380;
+webpackEmptyContext.id = 381;
 
 
 /***/ }),
 
-/***/ 381:
+/***/ 382:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(467);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(499);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(504);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dynamic__ = __webpack_require__(468);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__app_app_module__ = __webpack_require__(500);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__environments_environment__ = __webpack_require__(506);
 
 
 
@@ -262,7 +278,7 @@ __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_platform_browser_dyna
 
 /***/ }),
 
-/***/ 498:
+/***/ 499:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -284,8 +300,8 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-root',
-            template: __webpack_require__(566),
-            styles: [__webpack_require__(559)]
+            template: __webpack_require__(568),
+            styles: [__webpack_require__(561)]
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
@@ -295,7 +311,7 @@ var AppComponent = (function () {
 
 /***/ }),
 
-/***/ 499:
+/***/ 500:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -305,13 +321,15 @@ var AppComponent = (function () {
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__angular_http__ = __webpack_require__(206);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_cookie_services_cookies_service__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4_angular2_cookie_services_cookies_service___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_4_angular2_cookie_services_cookies_service__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__app_component__ = __webpack_require__(498);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__faq_list_faq_list_component__ = __webpack_require__(501);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_login_component__ = __webpack_require__(339);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__app_routes__ = __webpack_require__(500);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__faq_create_faq_create_component__ = __webpack_require__(336);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__faq_faq_component__ = __webpack_require__(338);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__search_search_component__ = __webpack_require__(502);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_ckeditor__ = __webpack_require__(855);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_ng2_ckeditor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_ng2_ckeditor__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_6__app_component__ = __webpack_require__(499);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__faq_list_faq_list_component__ = __webpack_require__(502);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__login_login_component__ = __webpack_require__(339);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__app_routes__ = __webpack_require__(501);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__faq_create_faq_create_component__ = __webpack_require__(336);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__faq_faq_component__ = __webpack_require__(338);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__search_search_component__ = __webpack_require__(504);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return AppModule; });
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -334,28 +352,30 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 
 
 
+
 var AppModule = (function () {
     function AppModule() {
     }
     AppModule = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
             declarations: [
-                __WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */],
-                __WEBPACK_IMPORTED_MODULE_6__faq_list_faq_list_component__["a" /* FaqListComponent */],
-                __WEBPACK_IMPORTED_MODULE_7__login_login_component__["a" /* LoginComponent */],
-                __WEBPACK_IMPORTED_MODULE_9__faq_create_faq_create_component__["a" /* FaqCreateComponent */],
-                __WEBPACK_IMPORTED_MODULE_10__faq_faq_component__["a" /* FaqComponent */],
-                __WEBPACK_IMPORTED_MODULE_11__search_search_component__["a" /* SearchComponent */]
+                __WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */],
+                __WEBPACK_IMPORTED_MODULE_7__faq_list_faq_list_component__["a" /* FaqListComponent */],
+                __WEBPACK_IMPORTED_MODULE_8__login_login_component__["a" /* LoginComponent */],
+                __WEBPACK_IMPORTED_MODULE_10__faq_create_faq_create_component__["a" /* FaqCreateComponent */],
+                __WEBPACK_IMPORTED_MODULE_11__faq_faq_component__["a" /* FaqComponent */],
+                __WEBPACK_IMPORTED_MODULE_12__search_search_component__["a" /* SearchComponent */]
             ],
             imports: [
                 __WEBPACK_IMPORTED_MODULE_0__angular_platform_browser__["a" /* BrowserModule */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["a" /* FormsModule */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["FormsModule"],
                 __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* HttpModule */],
-                __WEBPACK_IMPORTED_MODULE_8__app_routes__["a" /* routing */],
-                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["b" /* ReactiveFormsModule */]
+                __WEBPACK_IMPORTED_MODULE_9__app_routes__["a" /* routing */],
+                __WEBPACK_IMPORTED_MODULE_2__angular_forms__["ReactiveFormsModule"],
+                __WEBPACK_IMPORTED_MODULE_5_ng2_ckeditor__["CKEditorModule"]
             ],
             providers: [__WEBPACK_IMPORTED_MODULE_4_angular2_cookie_services_cookies_service__["CookieService"]],
-            bootstrap: [__WEBPACK_IMPORTED_MODULE_5__app_component__["a" /* AppComponent */]]
+            bootstrap: [__WEBPACK_IMPORTED_MODULE_6__app_component__["a" /* AppComponent */]]
         }), 
         __metadata('design:paramtypes', [])
     ], AppModule);
@@ -365,11 +385,11 @@ var AppModule = (function () {
 
 /***/ }),
 
-/***/ 500:
+/***/ 501:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(487);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_router__ = __webpack_require__(488);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__faq_faq_component__ = __webpack_require__(338);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__faq_create_faq_create_component__ = __webpack_require__(336);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__login_login_component__ = __webpack_require__(339);
@@ -390,7 +410,7 @@ var routing = __WEBPACK_IMPORTED_MODULE_0__angular_router__["a" /* RouterModule 
 
 /***/ }),
 
-/***/ 501:
+/***/ 502:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -414,7 +434,7 @@ var FaqListComponent = (function () {
     function FaqListComponent(faqService) {
         this.faqService = faqService;
         this.faqs = [];
-        this.entrada = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["e" /* FormControl */]();
+        this.entrada = new __WEBPACK_IMPORTED_MODULE_1__angular_forms__["FormControl"]();
     }
     FaqListComponent.prototype.ngOnInit = function () {
         var _this = this;
@@ -432,8 +452,8 @@ var FaqListComponent = (function () {
     FaqListComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-faq-list',
-            template: __webpack_require__(568),
-            styles: [__webpack_require__(561)],
+            template: __webpack_require__(570),
+            styles: [__webpack_require__(563)],
             providers: [
                 __WEBPACK_IMPORTED_MODULE_2__faq_service__["a" /* FaqService */]
             ]
@@ -447,7 +467,25 @@ var FaqListComponent = (function () {
 
 /***/ }),
 
-/***/ 502:
+/***/ 503:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = isSlugValidation;
+var S = __webpack_require__(380);
+function isSlugValidation() {
+    return function (control) {
+        var slug = control.value;
+        var sluglized = S(slug).slugify().s;
+        var isDifferent = sluglized !== slug;
+        return isDifferent ? { 'isNotSlug': isDifferent } : null;
+    };
+}
+//# sourceMappingURL=E:/faq/app/web/src/is-slug.directive.js.map
+
+/***/ }),
+
+/***/ 504:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -483,8 +521,8 @@ var SearchComponent = (function () {
     SearchComponent = __decorate([
         __webpack_require__.i(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
             selector: 'app-search',
-            template: __webpack_require__(571),
-            styles: [__webpack_require__(564)]
+            template: __webpack_require__(573),
+            styles: [__webpack_require__(566)]
         }), 
         __metadata('design:paramtypes', [])
     ], SearchComponent);
@@ -494,7 +532,7 @@ var SearchComponent = (function () {
 
 /***/ }),
 
-/***/ 503:
+/***/ 505:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -541,7 +579,7 @@ var UserService = (function () {
 
 /***/ }),
 
-/***/ 504:
+/***/ 506:
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -554,42 +592,6 @@ var environment = {
     production: false
 };
 //# sourceMappingURL=E:/faq/app/web/src/environment.js.map
-
-/***/ }),
-
-/***/ 559:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(53)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
-
-/***/ }),
-
-/***/ 560:
-/***/ (function(module, exports, __webpack_require__) {
-
-exports = module.exports = __webpack_require__(53)();
-// imports
-
-
-// module
-exports.push([module.i, "", ""]);
-
-// exports
-
-
-/*** EXPORTS FROM exports-loader ***/
-module.exports = module.exports.toString();
 
 /***/ }),
 
@@ -665,73 +667,91 @@ module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 566:
-/***/ (function(module, exports) {
+/***/ 565:
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<nav class=\"navbar navbar-default\">\n    <div class=\"container\">\n        <ul class=\"nav navbar-nav\">\n            <li><a routerLink=\"/\" routerLinkActive=\"active\">FAQ</a></li>\n            <li><a routerLink=\"/new\" routerLinkActive=\"active\">Novo</a></li>\n            <li><a routerLink=\"/login\" routerLinkActive=\"active\">Login</a></li>\n        </ul>\n    </div>\n</nav>\n\n<router-outlet></router-outlet>"
+exports = module.exports = __webpack_require__(53)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 
-/***/ 567:
-/***/ (function(module, exports) {
+/***/ 566:
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-sm-6 col-sm-offset-3\">\n            <form [formGroup]=\"faqForm\">\n                <div class=\"form-group\">\n                    <label for=\"title\">Titulo</label>\n                    <input type=\"text\" name=\"title\" id=\"title\" class=\"form-control\" formControlName=\"title\">\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"slug\">Slug</label> <button type=\"button\" (click)=\"autoSlugToggle()\"> mudar slug </button>\n                    <div [hidden]=\"!autoSlug\">\n                        <input type=\"text\" class=\"form-control\" [value]=\"slug\" disabled>\n                    </div>\n                    <div [hidden]=\"autoSlug\">\n                        <input type=\"text\" name=\"slug\" id=\"slug\" class=\"form-control\" formControlName=\"slug\">\n                    </div>\n                    <div [hidden]=\"!slugForm\">\n                        Erro\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"content\">Conteudo</label>\n                    <textarea name=\"content\" id=\"content\" class=\"form-control\" formControlName=\"content\"></textarea>\n                </div>\n            </form>\n            <p>Form value: {{faqForm.value|json}}</p>\n            <p>Form value: {{faqForm.status}}</p>\n        </div>\n    </div>\n</div>"
+exports = module.exports = __webpack_require__(53)();
+// imports
+
+
+// module
+exports.push([module.i, "", ""]);
+
+// exports
+
+
+/*** EXPORTS FROM exports-loader ***/
+module.exports = module.exports.toString();
 
 /***/ }),
 
 /***/ 568:
 /***/ (function(module, exports) {
 
-module.exports = "<form>\n    <input type=\"text\" [formControl]=\"entrada\">\n</form>\n\n<div *ngFor=\"let faq of faqs.data\" class=\"row\">\n    <div class=\"col-sm-12\">\n        {{faq.title}} <small>publicado {{faq.publish}}</small>\n        <div><code>{{faq.content}}</code></div>\n    </div>\n</div>"
+module.exports = "<nav class=\"navbar navbar-default\">\n    <div class=\"container\">\n        <ul class=\"nav navbar-nav\">\n            <li><a routerLink=\"/\" routerLinkActive=\"active\">FAQ</a></li>\n            <li><a routerLink=\"/new\" routerLinkActive=\"active\">Novo</a></li>\n            <li><a routerLink=\"/login\" routerLinkActive=\"active\">Login</a></li>\n        </ul>\n    </div>\n</nav>\n\n<router-outlet></router-outlet>"
 
 /***/ }),
 
 /***/ 569:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n    <app-faq-list></app-faq-list>\n</div>"
+module.exports = "<div class=\"container\">\n    <div class=\"row\">\n        <div class=\"col-sm-12\">\n            <form [formGroup]=\"faqForm\" (submit)=\"submit($event)\">\n                <div class=\"form-group\">\n                    <label for=\"title\">Titulo</label>\n                    <input type=\"text\" name=\"title\" id=\"title\" class=\"form-control\" formControlName=\"title\">\n                    <div [hidden]=\"!getFormErrors('title','required')\">\n                        Obrigatório\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <div class=\"input-group\">\n                        <input [style.display]=\"autoSlug ? 'block':'none'\" type=\"text\" class=\"form-control\" [value]=\"slug\" disabled>\n                        <input [style.display]=\"!autoSlug ? 'block':'none'\" type=\"text\" name=\"slug\" id=\"slug\" class=\"form-control\" formControlName=\"slug\">\n                        <span class=\"input-group-btn\">\n                            <button class=\"btn btn-default\" type=\"button\" (click)=\"autoSlugToggle()\"> {{!autoSlug?'auto':'manual'}} </button>\n                        </span>\n                    </div>\n                    <div [hidden]=\"!getFormErrors('slug','isNotSlug')\">\n                        Error no slug\n                    </div>\n                    <div [hidden]=\"!getFormErrors('slug','required')\">\n                        Obrigatório\n                    </div>\n                </div>\n                <div class=\"form-group\">\n                    <label for=\"content\">Conteudo</label>\n                    <ckeditor formControlName=\"content\" [config]=\"cheditorconfig\"></ckeditor>\n                    <div [hidden]=\"!getFormErrors('content','required')\">\n                        Obrigatório\n                    </div>\n                </div>\n                <button type=\"submit\" class=\"btn btn-primary\"> <i class=\"fa fa-save\"></i> salvar </button>\n            </form>\n        </div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 570:
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n\n    <div class=\"row\">\n        <div class=\"col-sm-4 col-sm-offset-4\">\n\n            <form #loginForm=\"ngForm\" (ngSubmit)=\"submit(loginForm)\">\n                <div class=\"form-group\">\n                    <label>Email: </label>\n                    <input id=\"email\" class=\"form-control\" type=\"email\" name=\"email\" id=\"login_email\" #email=\"ngModel\" [(ngModel)]=\"login.email\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label>Senha: </label>\n                    <input id=\"password\" class=\"form-control\" type=\"password\" name=\"password\" id=\"login_password\" #password=\"ngModel\" [(ngModel)]=\"login.passowrd\" required>\n                </div>\n                <button class=\"btn btn-primary btn-block\">ENTRAR</button>\n            </form>\n\n        </div>\n    </div>\n\n</div>"
+module.exports = "<div class=\"form-group\">\n    <input type=\"text\" [formControl]=\"entrada\" class=\"form-control\" placeholder=\"Gostaria de saber como ...\">\n</div>\n\n<div *ngFor=\"let faq of faqs.data\" class=\"row\">\n    <div class=\"col-sm-12\">\n        <h4>\n            {{faq.title}} <small>publicado {{faq.publish}}</small>\n        </h4>\n        <div [innerHTML]=\"faq.content\"></div>\n    </div>\n</div>"
 
 /***/ }),
 
 /***/ 571:
 /***/ (function(module, exports) {
 
+module.exports = "<div class=\"container\">\n    <app-faq-list></app-faq-list>\n</div>"
+
+/***/ }),
+
+/***/ 572:
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"container\">\n\n    <div class=\"row\">\n        <div class=\"col-sm-4 col-sm-offset-4\">\n\n            <form #loginForm=\"ngForm\" (ngSubmit)=\"submit(loginForm)\">\n                <div class=\"form-group\">\n                    <label>Email: </label>\n                    <input id=\"email\" class=\"form-control\" type=\"email\" name=\"email\" id=\"login_email\" #email=\"ngModel\" [(ngModel)]=\"login.email\" required>\n                </div>\n                <div class=\"form-group\">\n                    <label>Senha: </label>\n                    <input id=\"password\" class=\"form-control\" type=\"password\" name=\"password\" id=\"login_password\" #password=\"ngModel\" [(ngModel)]=\"login.passowrd\" required>\n                </div>\n                <button class=\"btn btn-primary btn-block\">ENTRAR</button>\n            </form>\n\n        </div>\n    </div>\n\n</div>"
+
+/***/ }),
+
+/***/ 573:
+/***/ (function(module, exports) {
+
 module.exports = "<div class=\"form-group\">\n    <input type=\"text\" name=\"q\" value=\"\" [placeholder]=\"placeholder\" (keyup)=\"inputKeyUp($event.target.value)\" class=\"form-control \"></div>"
 
 /***/ }),
 
-/***/ 836:
+/***/ 841:
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(381);
+module.exports = __webpack_require__(382);
 
-
-/***/ }),
-
-/***/ 845:
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (immutable) */ __webpack_exports__["a"] = isSlugValidation;
-var S = __webpack_require__(844);
-function isSlugValidation() {
-    return function (control) {
-        var slug = control.value;
-        var sluglized = S(slug).slugify().s;
-        var isDifferent = sluglized !== slug;
-        return isDifferent ? { 'isNotSlug': isDifferent } : null;
-    };
-}
-//# sourceMappingURL=E:/faq/app/web/src/is-slug.directive.js.map
 
 /***/ })
 
-},[836]);
+},[841]);
 //# sourceMappingURL=main.bundle.js.map

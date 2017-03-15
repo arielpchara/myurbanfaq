@@ -19,6 +19,7 @@ app.use('/api', require('./api'));
 const staticDir = path.join(__dirname, '/web/dist/');
 const indexFile = path.join(staticDir, 'index.html');
 app.use('/', express.static(__dirname + '/web/dist/'));
+app.use('/', express.static(__dirname + '/public'));
 app.use((req, res, next) => {
     fs.readFile(
         path.join(staticDir, 'index.html'), 'utf8',

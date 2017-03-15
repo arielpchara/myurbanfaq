@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 import { AppComponent } from './app.component';
 import { FaqListComponent } from './faq-list/faq-list.component';
@@ -27,7 +28,8 @@ import { SearchComponent } from './search/search.component';
     FormsModule,
     HttpModule,
     routing,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    CKEditorModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

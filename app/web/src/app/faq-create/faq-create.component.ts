@@ -23,6 +23,11 @@ export class FaqCreateComponent implements OnInit {
   slug = '';
   autoSlug = true;
   formErrors;
+  cheditorconfig = {
+    uiColor: '#FFFFFF',
+    language: 'pt-br',
+    skin: 'minimalist,/skins/minimalist/'
+  };
 
   constructor(
     private faqService: FaqService,
@@ -32,8 +37,7 @@ export class FaqCreateComponent implements OnInit {
     this.createForm();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   createForm() {
     this.faqForm = this.fb.group({
@@ -45,12 +49,16 @@ export class FaqCreateComponent implements OnInit {
     title.valueChanges.subscribe( data => {
       this.mountSlug(data);
     });
-    this.faqForm.valueChanges.subscribe( data => {
-      console.log(this.faqForm.controls);
-    });
   }
 
-
+  getFormErrors(controlName, type) {
+    const control = this.faqForm.get(controlName);
+    if ( !control.touched ) {
+      return false;
+    }
+    const avaiableErrors = control.errors;
+    return avaiableErrors && !!avaiableErrors[type];
+  }
 
   mountSlug(title) {
     this.slug = S(title).slugify().s;
@@ -66,16 +74,16 @@ export class FaqCreateComponent implements OnInit {
     }
   }
 
-  // submit(form) {
-  //   if( form.valid ) {
-  //     this.faqService.createFaq(
-  //       this.faq,
-  //       this.cookie.get('authorization_token')
-  //     ).subscribe(
-  //       done => console.log(done),
-  //       err => console.error(err)
-  //     );
-  //   }
-  // }
+  submit(event) {
+    console.log(this.faqForm.valid);
+    if ( this.faqForm.valid ) {
+
+      this.faqService.createFaq(this.faqForm.value, this.cookie.get('authorization_token'))
+        .subscribe(
+          resp => console.log(resp),
+          err => console.error(err)
+        );
+    }
+  }
 
 }
