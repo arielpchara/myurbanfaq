@@ -4,8 +4,11 @@ const handler = require('../handler'),
 
 exports.list = (req, res) => {
     const { successHandle, errorHandle } = handler(req, res);
-    faqService.list()
-        .then(successHandle)
+    const q = req.query.q;
+    (function() {
+        if (q) return faqService.filter(q);
+        return faqService.list();
+    }()).then(successHandle)
         .catch(errorHandle);
 };
 
