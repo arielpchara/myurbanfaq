@@ -2,10 +2,10 @@
     <div class="container">
         <ul class="nav navbar-nav">
             <li><a routerLink="/" routerLinkActive="active">FAQ</a></li>
-            <li><a routerLink="/new" routerLinkActive="active">Novo</a></li>
-            <li><a routerLink="/login" routerLinkActive="active">Login</a></li>
+            <li [style.display]="!isAuthenticated ? 'none' : 'block'"><a routerLink="/new" routerLinkActive="active">Novo documento</a></li>
+            <li [style.display]="isAuthenticated ? 'none' : 'block'"><a routerLink="/login" routerLinkActive="active">Login</a></li>
+            <li [style.display]="!isAuthenticated ? 'none' : 'block'"><a href="#" (click)="logout($event)">Logout</a></li>
         </ul>
     </div>
 </nav>
-
 <router-outlet></router-outlet>
