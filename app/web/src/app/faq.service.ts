@@ -12,18 +12,22 @@ export class FaqService {
 
   constructor(private http: Http) { }
 
-  getFaqs(value) : Observable<Faq[]> {
+  getFaqs(value): Observable<Faq[]> {
     return this.http.get(`/api/v1/faq?q=${value}`)
-      .map((res:Response) => res.json())
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
   }
 
-  createFaq(data, authorization) : Observable<Faq> {
+  createFaq(data, authorization): Observable<Faq> {
     return this.http.post(
-      '/api/v1/faq', data, {headers:new Headers({'x-access-token': authorization})})
-      .map((res:Response) => res.json())
-      .catch((error:any) => Observable.throw(error.json().error || 'Server error'))
+      '/api/v1/faq', data, {headers: new Headers({'x-access-token': authorization})})
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'))
+  }
 
+  getTags(): Observable<any> {
+    return this.http.get('/api/v1/faq/tags')
+      .map( (res: Response) => res.json());
   }
 
 }

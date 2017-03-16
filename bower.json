@@ -1,0 +1,22 @@
+{
+  "name": "myurbanfaq",
+  "description": "",
+  "main": "index.js",
+  "authors": [
+    "Ariel Pchara <ariel.pchara@ezcommerce.com.br>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/arielpchara/myurbanfaq",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/public/lib",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "ckeditor": "^4.6.2"
+  }
+}

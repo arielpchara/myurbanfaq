@@ -15,22 +15,19 @@ import { FaqService } from '../faq.service';
   ]
 })
 export class FaqListComponent implements OnInit {
-  
   faqs = [];
   entrada = new FormControl();
-  
-  constructor(private faqService:FaqService) {}
+  constructor(private faqService: FaqService) {}
 
   ngOnInit() {
-    this.update('');
     this.entrada.valueChanges
+      .filter( value => value.length > 2 )
       .debounceTime(400)
       .distinctUntilChanged()
       .subscribe( data => this.update(data) )
   }
 
-
-  update(value:any = '') {
+  update(value: any = '') {
     this.faqService.getFaqs(value).subscribe(
       faqs => this.faqs = faqs,
       err =>  console.error(err)

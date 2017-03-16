@@ -11,6 +11,7 @@ module.exports = (request, response) => {
     }
 
     function errorHandle(error) {
+        console.error(error);
         response.json(jsonModel(request.fullUrl, {
             error,
             success: false

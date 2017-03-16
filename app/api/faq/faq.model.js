@@ -8,7 +8,8 @@ var faqSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     },
-    content: String
+    content: String,
+    tags: [String]
 });
 
 faqSchema.pre('save', function(next) {
@@ -19,6 +20,12 @@ faqSchema.pre('save', function(next) {
 });
 
 faqSchema.index({ title: 1 }, { unique: true });
-faqSchema.index({ "content": "text" });
+faqSchema.index({ title: 'text', content: 'text', tags: 'text' }, {
+    weights: {
+        tags: 1,
+        title: 10,
+        content: 20
+    }
+});
 
 module.exports = mongoose.model('Faq', faqSchema);

@@ -19,6 +19,13 @@ exports.get = (req, res) => {
         .catch(errorHandle);
 };
 
+exports.tags = (req, res) => {
+    const { successHandle, errorHandle } = handler(req, res);
+    faqService.getAllTags()
+        .then(successHandle)
+        .catch(errorHandle);
+};
+
 exports.published = (req, res) => {
     const { successHandle, errorHandle } = handler(req, res);
     faqService.published()
@@ -28,6 +35,11 @@ exports.published = (req, res) => {
 
 exports.create = (req, res) => {
     const { successHandle, errorHandle } = handler(req, res);
+
+    if (typeof req.body.tags === 'string') {
+        req.body.tags = req.body.tags.trim().split(' ');
+    }
+
     faqService.create(req.body)
         .then(successHandle)
         .catch(errorHandle);

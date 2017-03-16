@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const Faq = require('./faq.model');
 
 
@@ -11,7 +12,7 @@ exports.filter = (text = {}) => {
             $search: text
         }
     };
-    return Faq.find(filter);
+    return Faq.find(filter, { score: { $meta: 'textScore' } }).sort({ date: 1 });
 }
 
 exports.published = () => {
@@ -40,3 +41,16 @@ exports.update = (id, data) => {
         return faq.save();
     });
 };
+
+exports.getAllTags = () => {
+    return Faq.aggregate([
+        { $unwind: '$tags' },
+        {
+            $group: {
+                _id: '$tags',
+                count: { $sum: 1 }
+            }
+        },
+        { $sort: { 'count': -1 } }
+    ]);
+}
