@@ -1,15 +1,26 @@
 webpackJsonp([2,4],{
 
+<<<<<<< HEAD
 /***/ 388:
+=======
+/***/ 387:
+>>>>>>> 82d95fa59f826a94405c4ffd8db5eb3a6c18ef72
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
+<<<<<<< HEAD
 var content = __webpack_require__(564);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // add the styles to the DOM
 var update = __webpack_require__(845)(content, {});
+=======
+var content = __webpack_require__(563);
+if(typeof content === 'string') content = [[module.i, content, '']];
+// add the styles to the DOM
+var update = __webpack_require__(844)(content, {});
+>>>>>>> 82d95fa59f826a94405c4ffd8db5eb3a6c18ef72
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -84,7 +95,11 @@ module.exports = function() {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 564:
+=======
+/***/ 563:
+>>>>>>> 82d95fa59f826a94405c4ffd8db5eb3a6c18ef72
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(53)();
@@ -99,7 +114,11 @@ exports.push([module.i, "/* You can add global styles to this file, and also imp
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 845:
+=======
+/***/ 844:
+>>>>>>> 82d95fa59f826a94405c4ffd8db5eb3a6c18ef72
 /***/ (function(module, exports) {
 
 /*
@@ -352,13 +371,24 @@ function updateLink(linkElement, obj) {
 
 /***/ }),
 
+<<<<<<< HEAD
 /***/ 849:
 /***/ (function(module, exports, __webpack_require__) {
 
 module.exports = __webpack_require__(388);
+=======
+/***/ 848:
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(387);
+>>>>>>> 82d95fa59f826a94405c4ffd8db5eb3a6c18ef72
 
 
 /***/ })
 
+<<<<<<< HEAD
 },[849]);
+=======
+},[848]);
+>>>>>>> 82d95fa59f826a94405c4ffd8db5eb3a6c18ef72
 //# sourceMappingURL=styles.bundle.js.map
