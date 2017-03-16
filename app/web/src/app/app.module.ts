@@ -12,6 +12,7 @@ import { routing } from './app.routes';
 import { FaqCreateComponent } from './faq-create/faq-create.component';
 import { FaqComponent } from './faq/faq.component';
 import { SearchComponent } from './search/search.component';
+import { HeaderComponent } from './header/header.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { SearchComponent } from './search/search.component';
     LoginComponent,
     FaqCreateComponent,
     FaqComponent,
-    SearchComponent
+    SearchComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
