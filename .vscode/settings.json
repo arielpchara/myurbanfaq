@@ -1,5 +1,7 @@
 {
-    "vsicons.presets.angular": false,
     "eslint.enable": true,
-    "tslint.autoFixOnSave": true
+    "tslint.autoFixOnSave": true,
+    "files.associations": {
+        "**/web/src/**/*.js": "javascriptreact"
+    }
 }
